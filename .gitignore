@@ -1,0 +1,31 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Backup and temporary files
+*.bak
+*.bak2
+scratch/
+temp_*
+
+# Runtime uploads and logs
+uploads/*
+!uploads/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# IDE and OS artifacts
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
