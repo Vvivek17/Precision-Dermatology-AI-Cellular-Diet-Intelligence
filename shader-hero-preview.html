@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animated Shader Hero - Live Preview</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN for instant preview -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-in-down {
+      animation: fadeInDown 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-600 { animation-delay: 0.6s; }
+    .delay-800 { animation-delay: 0.8s; }
+  </style>
+</head>
+<body class="bg-black text-white selection:bg-orange-500 selection:text-black">
+
+  <!-- HERO SECTION -->
+  <div class="relative w-full min-h-screen overflow-hidden bg-black flex items-center justify-center">
+    <!-- WebGL Canvas -->
+    <canvas id="shaderCanvas" class="absolute inset-0 w-full h-full object-contain touch-none" style="background: black;"></canvas>
+
+    <!-- Content Overlay -->
+    <div class="relative z-10 flex flex-col items-center justify-center text-white px-4 py-16 text-center max-w-5xl mx-auto pointer-events-none">
+      
+      <!-- Trust Badge -->
+      <div class="mb-8 animate-fade-in-down pointer-events-auto">
+        <div class="inline-flex items-center gap-2.5 px-6 py-2.5 bg-orange-500/10 backdrop-blur-md border border-orange-300/30 rounded-full text-sm font-medium shadow-lg shadow-orange-500/10">
+          <span class="flex items-center text-yellow-300">✨</span>
+          <span class="text-orange-100">Trusted by forward-thinking medical & AI engineering teams</span>
+        </div>
+      </div>
+
+      <!-- Main Headline with dual-color gradients -->
+      <div class="space-y-2 mb-6">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent animate-fade-in-up delay-200">
+          Launch Your
+        </h1>
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent animate-fade-in-up delay-400">
+          Workflow Into Orbit
+        </h1>
+      </div>
+
+      <!-- Subtitle -->
+      <div class="max-w-3xl mx-auto mb-10 animate-fade-in-up delay-600">
+        <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-orange-100/90 font-light leading-relaxed">
+          Supercharge productivity with AI-powered cellular intelligence and integrations built for the next generation of diagnostics — fast, seamless, and limitless.
+        </p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pointer-events-auto animate-fade-in-up delay-800">
+        <a href="#demo-code" class="px-8 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 cursor-pointer">
+          Get Started for Free
+        </a>
+        <a href="#features" class="px-8 py-4 bg-orange-500/10 hover:bg-orange-500/20 border border-orange-300/30 hover:border-orange-300/50 text-orange-100 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 backdrop-blur-sm cursor-pointer">
+          Explore Features
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HOW TO USE / CODE SECTION -->
+  <section id="demo-code" class="relative z-10 bg-neutral-900 border-t border-neutral-800 py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="p-2 bg-orange-500/20 text-orange-400 rounded-lg text-lg">⚛️</span>
+        <h2 class="text-3xl font-bold text-white">How to Use in React / shadcn</h2>
+      </div>
+
+      <p class="text-neutral-400 mb-6">
+        The component is installed at <code class="text-orange-300 bg-neutral-800 px-2 py-1 rounded">components/ui/animated-shader-hero.tsx</code>. You can import and customize it with any props:
+      </p>
+
+      <div class="bg-neutral-950 border border-neutral-800 rounded-xl p-6 shadow-2xl overflow-x-auto">
+        <pre class="text-sm text-neutral-300 font-mono"><code>import Hero from "@/components/ui/animated-shader-hero";
+
+export default function Page() {
+  return (
+    &lt;Hero
+      trustBadge={{
+        text: "Clinical Grade AI & Cellular Diet Protocol",
+        icons: ["🔬", "⚡", "✨"]
+      }}
+      headline={{
+        line1: "Precision Dermatology",
+        line2: "Cellular Diet Intelligence"
+      }}
+      subtitle="Deep-learning dermatological analysis mapped with molecular nutrition pathways."
+      buttons={{
+        primary: {
+          text: "Analyze Specimen",
+          onClick: () => console.log("Start analysis")
+        },
+        secondary: {
+          text: "View 12 Diseases",
+          onClick: () => console.log("View pathology")
+        }
+      }}
+    /&gt;
+  );
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHADER SCRIPT -->
+  <script>
+    const defaultShaderSource = `#version 300 es
+    precision highp float;
+    out vec4 O;
+    uniform vec2 resolution;
+    uniform float time;
+    #define FC gl_FragCoord.xy
+    #define T time
+    #define R resolution
+    #define MN min(R.x,R.y)
+    float rnd(vec2 p) {
+      p=fract(p*vec2(12.9898,78.233));
+      p+=dot(p,p+34.56);
+      return fract(p.x*p.y);
+    }
+    float noise(in vec2 p) {
+      vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
+      float a=rnd(i), b=rnd(i+vec2(1,0)), c=rnd(i+vec2(0,1)), d=rnd(i+1.);
+      return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+    }
+    float fbm(vec2 p) {
+      float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
+      for (int i=0; i<5; i++) {
+        t+=a*noise(p);
+        p*=2.*m;
+        a*=.5;
+      }
+      return t;
+    }
+    float clouds(vec2 p) {
+      float d=1., t=.0;
+      for (float i=.0; i<3.; i++) {
+        float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
+        t=mix(t,d,a);
+        d=a;
+        p*=2./(i+1.);
+      }
+      return t;
+    }
+    void main(void) {
+      vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
+      vec3 col=vec3(0);
+      float bg=clouds(vec2(st.x+T*.5,-st.y));
+      uv*=1.-.3*(sin(T*.2)*.5+.5);
+      for (float i=1.; i<12.; i++) {
+        uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
+        vec2 p=uv;
+        float d=length(p);
+        col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+        float b=noise(i+p+bg*1.731);
+        col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+        col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
+      }
+      O=vec4(col,1);
+    }`;
+
+    const canvas = document.getElementById('shaderCanvas');
+    const gl = canvas.getContext('webgl2');
+
+    if (!gl) {
+      console.warn("WebGL2 not supported");
+    } else {
+      let program, vs, fs, buffer;
+      const vertexSrc = `#version 300 es
+      precision highp float;
+      in vec4 position;
+      void main(){gl_Position=position;}`;
+
+      const vertices = new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]);
+
+      function compile(shader, source) {
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(shader));
+        }
+      }
+
+      function setup() {
+        vs = gl.createShader(gl.VERTEX_SHADER);
+        fs = gl.createShader(gl.FRAGMENT_SHADER);
+        compile(vs, vertexSrc);
+        compile(fs, defaultShaderSource);
+        program = gl.createProgram();
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+
+        buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+        const position = gl.getAttribLocation(program, 'position');
+        gl.enableVertexAttribArray(position);
+        gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+        program.resolution = gl.getUniformLocation(program, 'resolution');
+        program.time = gl.getUniformLocation(program, 'time');
+        program.move = gl.getUniformLocation(program, 'move');
+        program.touch = gl.getUniformLocation(program, 'touch');
+        program.pointerCount = gl.getUniformLocation(program, 'pointerCount');
+        program.pointers = gl.getUniformLocation(program, 'pointers');
+      }
+
+      setup();
+
+      let mouseMove = [0, 0];
+      let mouseCoords = [0, 0];
+      let pointerCoords = [0, 0];
+      let nbrOfPointers = 0;
+      let dpr = 1;
+
+      function resize() {
+        dpr = Math.max(1, 0.5 * window.devicePixelRatio);
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      let isDown = false;
+      window.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        nbrOfPointers = 1;
+        mouseCoords = [e.clientX * dpr, canvas.height - e.clientY * dpr];
+        pointerCoords = mouseCoords;
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        mouseMove = [mouseMove[0] + e.movementX, mouseMove[1] + e.movementY];
+        mouseCoords = [e.clientX * dpr, canvas.height - e.clientY * dpr];
+        pointerCoords = mouseCoords;
+      });
+
+      window.addEventListener('pointerup', () => { isDown = false; nbrOfPointers = 0; });
+      window.addEventListener('pointercancel', () => { isDown = false; nbrOfPointers = 0; });
+
+      function render(now) {
+        if (!program) return;
+        gl.clearColor(0, 0, 0, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.useProgram(program);
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+
+        gl.uniform2f(program.resolution, canvas.width, canvas.height);
+        gl.uniform1f(program.time, now * 0.001);
+        gl.uniform2f(program.move, mouseMove[0], mouseMove[1]);
+        gl.uniform2f(program.touch, mouseCoords[0], mouseCoords[1]);
+        gl.uniform1i(program.pointerCount, nbrOfPointers);
+        gl.uniform2fv(program.pointers, pointerCoords);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+    }
+  </script>
+</body>
+</html>

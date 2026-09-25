@@ -1894,7 +1894,167 @@
     animation: fadeIn 0.3s ease;
   }
 
+  /* ── Animated Shader Hero ── */
+  .animated-shader-hero {
+    position: relative;
+    width: 100%;
+    min-height: 82vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(249, 115, 22, 0.25);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  }
+  .shader-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    background: #000;
+    z-index: 1;
+  }
+  .shader-hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    color: #fff;
+    pointer-events: none;
+  }
+  .shader-trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.4rem;
+    background: rgba(249, 115, 22, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(253, 186, 116, 0.35);
+    border-radius: 9999px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 1.8rem;
+    pointer-events: auto;
+    animation: fadeInDown 0.8s ease-out forwards;
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.15);
+  }
+  .shader-trust-badge .trust-icon {
+    font-size: 1.1rem;
+    color: #fde047;
+  }
+  .shader-trust-badge .trust-text {
+    color: #ffedd5;
+    letter-spacing: 0.01em;
+  }
+  .shader-headlines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.6rem;
+  }
+  .shader-h1-line1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    background: linear-gradient(90deg, #fdba74 0%, #facc15 50%, #fcd34d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 0.8s 0.2s ease-out forwards;
+    opacity: 0;
+  }
+  .shader-h1-line2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    background: linear-gradient(90deg, #fde047 0%, #fb923c 50%, #f87171 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 0.8s 0.4s ease-out forwards;
+    opacity: 0;
+  }
+  .shader-subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    color: rgba(255, 237, 213, 0.94);
+    font-weight: 300;
+    line-height: 1.65;
+    max-width: 820px;
+    margin: 0 auto 2.4rem auto;
+    animation: fadeInUp 0.8s 0.6s ease-out forwards;
+    opacity: 0;
+  }
+  .shader-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    animation: fadeInUp 0.8s 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  .shader-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2.4rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000;
+    background: linear-gradient(90deg, #f97316 0%, #eab308 100%);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.35);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .shader-btn-primary:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 18px 40px rgba(249, 115, 22, 0.55);
+    background: linear-gradient(90deg, #ea580c 0%, #ca8a04 100%);
+  }
+  .shader-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffedd5;
+    background: rgba(249, 115, 22, 0.12);
+    border: 1px solid rgba(253, 186, 116, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .shader-btn-secondary:hover {
+    background: rgba(249, 115, 22, 0.22);
+    border-color: rgba(253, 186, 116, 0.6);
+    transform: translateY(-2px) scale(1.04);
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   /* Print Styles */
+
   @media print {
     body { background: #ffffff !important; color: #000000 !important; }
     body::before, header, .benchmark-strip, .hero-box, .studio-grid, .inspection-view, .nav-tabs, .catalog-sec, .btn, .disclaimer-card { display: none !important; }
@@ -1928,6 +2088,32 @@
     </button>
   </div>
 </header>
+
+<!-- Animated Shader Hero -->
+<section class="animated-shader-hero" id="heroSection">
+  <canvas id="heroShaderCanvas" class="shader-canvas"></canvas>
+  <div class="shader-hero-content">
+    <div class="shader-trust-badge">
+      <span class="trust-icon">✨</span>
+      <span class="trust-text">Validated on 10,000+ HAM10000 Clinical Specimens & Epigenetics</span>
+    </div>
+    <div class="shader-headlines">
+      <h1 class="shader-h1-line1">Precision Dermatology AI</h1>
+      <h1 class="shader-h1-line2">Cellular Diet Intelligence</h1>
+    </div>
+    <p class="shader-subtitle">
+      Supercharge diagnostic precision with AI-powered neural vision, 12 pathology classifications, and tailored molecular nutrition protocols across 9 languages.
+    </p>
+    <div class="shader-cta-group">
+      <button type="button" class="shader-btn-primary" onclick="scrollToUpload()">
+        🚀 Start Clinical Scan
+      </button>
+      <button type="button" class="shader-btn-secondary" onclick="scrollToBenchmarks()">
+        ⚡ Instant 12 Pathologies
+      </button>
+    </div>
+  </div>
+</section>
 
 <!-- One-Click Benchmark Ribbon -->
 <div class="benchmark-strip">
@@ -2024,15 +2210,6 @@
 </div>
 
 <main>
-  <!-- Hero -->
-  <div class="hero-box" id="heroBox">
-    <div class="hero-pill">✨ Transfer Learning EfficientNetB3 + Cellular Epigenetic Nutrition</div>
-    <h1 class="hero-title">Precision <span>Dermatology AI</span><br>& Cellular Diet Intelligence</h1>
-    <p class="hero-desc">
-      Detect 7 skin cancer and dermatological conditions with deep neural vision. Instantly unlock a personalized, scientific cellular diet plan and comprehensive clinical pathophysiology.
-    </p>
-  </div>
-
   <!-- Upload Studio -->
   <div class="studio-grid" id="uploadStudio">
     <div class="upload-card" id="dropZone"
@@ -6493,7 +6670,196 @@ async function loadDiseaseCatalog() {
   } catch (e) {}
 }
 
-window.addEventListener('DOMContentLoaded', init);
+// ── Animated Shader Hero (WebGL2) ──
+function scrollToUpload() {
+  const el = document.getElementById('uploadStudio') || document.getElementById('dropZone');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const drop = document.getElementById('dropZone');
+    if (drop) {
+      drop.style.borderColor = 'var(--cyan)';
+      drop.style.boxShadow = '0 0 35px rgba(0, 210, 255, 0.45)';
+      setTimeout(() => {
+        drop.style.borderColor = '';
+        drop.style.boxShadow = '';
+      }, 1600);
+    }
+  }
+}
+
+function scrollToBenchmarks() {
+  const el = document.querySelector('.benchmark-strip');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function initShaderHero() {
+  const canvas = document.getElementById('heroShaderCanvas');
+  if (!canvas) return;
+  const gl = canvas.getContext('webgl2');
+  if (!gl) {
+    console.warn('[!] WebGL2 not supported on this browser/GPU');
+    return;
+  }
+
+  const defaultShaderSource = `#version 300 es
+  precision highp float;
+  out vec4 O;
+  uniform vec2 resolution;
+  uniform float time;
+  #define FC gl_FragCoord.xy
+  #define T time
+  #define R resolution
+  #define MN min(R.x,R.y)
+  float rnd(vec2 p) {
+    p=fract(p*vec2(12.9898,78.233));
+    p+=dot(p,p+34.56);
+    return fract(p.x*p.y);
+  }
+  float noise(in vec2 p) {
+    vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
+    float a=rnd(i), b=rnd(i+vec2(1,0)), c=rnd(i+vec2(0,1)), d=rnd(i+1.);
+    return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
+  }
+  float fbm(vec2 p) {
+    float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
+    for (int i=0; i<5; i++) {
+      t+=a*noise(p);
+      p*=2.*m;
+      a*=.5;
+    }
+    return t;
+  }
+  float clouds(vec2 p) {
+    float d=1., t=.0;
+    for (float i=.0; i<3.; i++) {
+      float a=d*fbm(i*10.+p.x*.2+.2*(1.+i)*p.y+d+i*i+p);
+      t=mix(t,d,a);
+      d=a;
+      p*=2./(i+1.);
+    }
+    return t;
+  }
+  void main(void) {
+    vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
+    vec3 col=vec3(0);
+    float bg=clouds(vec2(st.x+T*.5,-st.y));
+    uv*=1.-.3*(sin(T*.2)*.5+.5);
+    for (float i=1.; i<12.; i++) {
+      uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
+      vec2 p=uv;
+      float d=length(p);
+      col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+      float b=noise(i+p+bg*1.731);
+      col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+      col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
+    }
+    O=vec4(col,1);
+  }`;
+
+  const vertexSrc = `#version 300 es
+  precision highp float;
+  in vec4 position;
+  void main(){gl_Position=position;}`;
+
+  const vertices = new Float32Array([-1, 1, -1, -1, 1, 1, 1, -1]);
+
+  function compile(shader, source) {
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      console.error(gl.getShaderInfoLog(shader));
+    }
+  }
+
+  const vs = gl.createShader(gl.VERTEX_SHADER);
+  const fs = gl.createShader(gl.FRAGMENT_SHADER);
+  compile(vs, vertexSrc);
+  compile(fs, defaultShaderSource);
+  const program = gl.createProgram();
+  gl.attachShader(program, vs);
+  gl.attachShader(program, fs);
+  gl.linkProgram(program);
+
+  const buffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+  const position = gl.getAttribLocation(program, 'position');
+  gl.enableVertexAttribArray(position);
+  gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+  const uResolution = gl.getUniformLocation(program, 'resolution');
+  const uTime = gl.getUniformLocation(program, 'time');
+  const uMove = gl.getUniformLocation(program, 'move');
+  const uTouch = gl.getUniformLocation(program, 'touch');
+  const uPointerCount = gl.getUniformLocation(program, 'pointerCount');
+  const uPointers = gl.getUniformLocation(program, 'pointers');
+
+  let mouseMove = [0, 0];
+  let mouseCoords = [0, 0];
+  let pointerCoords = [0, 0];
+  let nbrOfPointers = 0;
+  let dpr = 1;
+
+  function resize() {
+    dpr = Math.max(1, 0.5 * (window.devicePixelRatio || 1));
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = (rect.width || window.innerWidth) * dpr;
+    canvas.height = (rect.height || window.innerHeight) * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  let isDown = false;
+  window.addEventListener('pointerdown', (e) => {
+    isDown = true;
+    nbrOfPointers = 1;
+    const rect = canvas.getBoundingClientRect();
+    mouseCoords = [(e.clientX - rect.left) * dpr, canvas.height - (e.clientY - rect.top) * dpr];
+    pointerCoords = mouseCoords;
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if (!isDown) return;
+    mouseMove = [mouseMove[0] + e.movementX, mouseMove[1] + e.movementY];
+    const rect = canvas.getBoundingClientRect();
+    mouseCoords = [(e.clientX - rect.left) * dpr, canvas.height - (e.clientY - rect.top) * dpr];
+    pointerCoords = mouseCoords;
+  });
+
+  window.addEventListener('pointerup', () => { isDown = false; nbrOfPointers = 0; });
+  window.addEventListener('pointercancel', () => { isDown = false; nbrOfPointers = 0; });
+
+  function render(now) {
+    if (!program || gl.isContextLost()) return;
+    gl.clearColor(0, 0, 0, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(program);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+
+    gl.uniform2f(uResolution, canvas.width, canvas.height);
+    gl.uniform1f(uTime, now * 0.001);
+    gl.uniform2f(uMove, mouseMove[0], mouseMove[1]);
+    gl.uniform2f(uTouch, mouseCoords[0], mouseCoords[1]);
+    gl.uniform1i(uPointerCount, nbrOfPointers);
+    gl.uniform2fv(uPointers, pointerCoords);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  init();
+  initShaderHero();
+});
 </script>
+
 </body>
 </html>

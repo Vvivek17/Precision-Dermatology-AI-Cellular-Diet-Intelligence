@@ -187,6 +187,12 @@ def serve_diet_translations():
     return send_from_directory('.', 'diet_translations.js', mimetype='application/javascript')
 
 
+@app.route('/shader-hero')
+def serve_shader_hero():
+    """Live interactive preview of the Animated Shader Hero component."""
+    return send_from_directory('.', 'shader-hero-preview.html')
+
+
 @app.route('/api/samples', methods=['GET'])
 def get_samples():
     """Return benchmark lesion samples for instant one-click testing."""
