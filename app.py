@@ -35,9 +35,12 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
     return response
 
-@app.route('/api/<path:subpath>', methods=['OPTIONS'])
-def handle_options(subpath):
-    return '', 204
+@app.before_request
+def handle_options():
+    if request.method == 'OPTIONS':
+        from flask import Response
+        return Response('', status=204)
+
 
 # ── Load model (optional) ─────────────────────────────────
 MODEL = None
@@ -187,6 +190,12 @@ def serve_diet_translations():
     return send_from_directory('.', 'diet_translations.js', mimetype='application/javascript')
 
 
+@app.route('/age_intelligence.js')
+def serve_age_intelligence():
+    return send_from_directory('.', 'age_intelligence.js', mimetype='application/javascript')
+
+
+
 @app.route('/shader-hero')
 def serve_shader_hero():
     """Live interactive preview of the Animated Shader Hero component."""
@@ -225,6 +234,7 @@ def predict():
     # 1. Handle JSON input (base64 or sample filename)
     if request.is_json:
         data = request.get_json(silent=True) or {}
+        age = data.get('age', request.args.get('age', 28))
 
         # Case A: Preset sample image or local file path selected
         sample_name = data.get('sample_filename') or data.get('image_path')
@@ -235,7 +245,7 @@ def predict():
                 sample_path = sample_name
             if os.path.exists(sample_path):
                 try:
-                    result = predict_disease(sample_path, MODEL)
+                    result = predict_disease(sample_path, MODEL, age=age)
                     return jsonify({'success': True, 'result': result})
                 except Exception as e:
                     return jsonify({'error': f"Inference failed: {str(e)}"}), 500
@@ -252,7 +262,7 @@ def predict():
                 req = urllib.request.Request(image_url, headers={'User-Agent': 'Mozilla/5.0'})
                 with urllib.request.urlopen(req, timeout=10) as resp, open(tmp_path, 'wb') as out_f:
                     out_f.write(resp.read())
-                result = predict_disease(tmp_path, MODEL)
+                result = predict_disease(tmp_path, MODEL, age=age)
                 if os.path.exists(tmp_path):
                     os.remove(tmp_path)
                 return jsonify({'success': True, 'result': result})
@@ -272,7 +282,7 @@ def predict():
                 tmp_path = os.path.join(app.config['UPLOAD_FOLDER'], 'tmp_upload.jpg')
                 with open(tmp_path, 'wb') as f:
                     f.write(img_bytes)
-                result = predict_disease(tmp_path, MODEL)
+                result = predict_disease(tmp_path, MODEL, age=age)
                 if os.path.exists(tmp_path):
                     os.remove(tmp_path)
                 return jsonify({'success': True, 'result': result})
@@ -290,13 +300,15 @@ def predict():
     if not allowed_file(file.filename):
         return jsonify({'error': 'Invalid file type. Supported formats: PNG, JPG, JPEG, WEBP'}), 400
 
+    age = request.form.get('age', request.args.get('age', 28))
+
     try:
         os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
 
-        result = predict_disease(filepath, MODEL)
+        result = predict_disease(filepath, MODEL, age=age)
 
         if os.path.exists(filepath):
             os.remove(filepath)
@@ -304,6 +316,19 @@ def predict():
         return jsonify({'success': True, 'result': result})
     except Exception as e:
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
+
+
+@app.route('/api/age-protocol/<condition>', methods=['GET'])
+def get_age_protocol(condition):
+    """Return clinical medications and nutritional adaptations for a given disease and age."""
+    from models.age_intelligence import get_age_clinical_protocol
+    age = request.args.get('age', 28, type=float)
+    protocol = get_age_clinical_protocol(condition, age)
+    return jsonify({
+        'success': True,
+        'protocol': protocol
+    })
+
 
 
 @app.route('/api/diseases', methods=['GET'])

@@ -15,6 +15,8 @@ from models.cultural_diets import (
     get_cultural_diet_plan, SUPPORTED_COUNTRIES, SUPPORTED_LANGUAGES, get_diet_translations,
     CONDITION_DIET_DESCRIPTIONS, CULINARY_FOCUS_TRANSLATIONS
 )
+from models.age_intelligence import get_age_clinical_protocol, get_age_group
+
 
 # ─────────────────────────────────────────────────────────────
 # 7 Disease Classes with In-Depth Clinical & Nutritional Knowledge
@@ -1426,11 +1428,11 @@ def simulate_prediction(image_array=None, filename=""):
     }
 
 
-def predict_disease(image_path, model=None):
+def predict_disease(image_path, model=None, age=28):
     """
     Main prediction pipeline.
     Produces comprehensive diagnosis, targeted diet plan, clinical profile,
-    and image structural metrics.
+    age-stratified medications & diet modifications, and image structural metrics.
     """
     img_array = preprocess_image(image_path)
     filename = os.path.basename(image_path)
@@ -1483,6 +1485,13 @@ def predict_disease(image_path, model=None):
             "vegetarian": veg_plan
         }
 
+    # Generate age-stratified clinical medications and targeted nutrition protocol
+    try:
+        age_val = float(age) if age is not None else 28.0
+    except (ValueError, TypeError):
+        age_val = 28.0
+    age_protocol = get_age_clinical_protocol(code, age_val)
+
     return {
         "disease": disease_info["name"],
         "code": disease_info["code"],
@@ -1494,6 +1503,8 @@ def predict_disease(image_path, model=None):
         "description": disease_info["description"],
         "advice": SEVERITY_ADVICE[severity],
         "color": disease_info["color"],
+        "patient_age": age_val,
+        "age_clinical_protocol": age_protocol,
         "clinical_profile": disease_info.get("clinical_profile", {}),
         "diet_plan": disease_info.get("diet_plan", {}),
         "diet_translations": CONDITION_DIET_DESCRIPTIONS.get(code, {}),
@@ -1517,3 +1528,4 @@ def predict_disease(image_path, model=None):
         },
         "disclaimer": "DermAI is an AI-assisted research and educational diagnostic support tool. It does not replace a clinical examination, dermoscopy, or biopsy performed by a board-certified dermatologist."
     }
+
